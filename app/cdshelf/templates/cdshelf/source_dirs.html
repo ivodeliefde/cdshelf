@@ -1,0 +1,15 @@
+{% extends "cdshelf/cdshelf_base.html" %}
+
+{% block title %}CD Shelf{% endblock %}
+
+{% block content %}
+{% if source_dirs_list %}
+    <ul>
+    {% for source_dir in source_dirs_list %}
+    <li><a href="{% url 'cdshelf:load_source_dir' source_dir.id %}">{{ source_dir.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No sources available..</p>
+{% endif %}
+{% endblock %}

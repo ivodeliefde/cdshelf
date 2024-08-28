@@ -1,0 +1,15 @@
+{% extends "cdshelf/cdshelf_base.html" %}
+
+{% block title %}CD Shelf{% endblock %}
+
+{% block content %}
+{% if first_cds_list %}
+    <ul>
+    {% for cd in first_cds_list %}
+        <li><a href="{% url 'cdshelf:cd' cd.id %}">{{ cd.title }} - {{ cd.artist }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No CDs on the shelf..</p>
+{% endif %}
+{% endblock %}

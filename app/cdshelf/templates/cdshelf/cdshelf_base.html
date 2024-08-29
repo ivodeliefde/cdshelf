@@ -1,32 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark" />
     <title>CD Shelf</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color:black;
-        }
-        header {
-            text-align: center;
-            padding: 10px 0;
-        }
-        main {
-            padding: 20px;
-        }
-    </style>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.slate.min.css">
 </head>
 <body>
     <header>
-        <a href="{% url 'cdshelf:home' %}">CD Shelf</a>
-        <h1>{% block title %}{% endblock title %}</h1>
+    <a href="{% url 'cdshelf:home' %}">CD Shelf</a>
     </header>
-    <main>
+    <main class="container">
+
         {% block content %}{% endblock content %}
     </main>
+    <link rel="stylesheet" href="{% static 'cdshelf.css' %}">
 </body>
 </html>

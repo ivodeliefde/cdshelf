@@ -1,11 +1,8 @@
 {% extends "cdshelf/cdshelf_base.html" %}
 
-{% block title %}{{ artist }}{% endblock %}
-
 {% block content %}
-<ul>
+<blockquote><h1>{{ artist }}</h1></blockquote>
 {% for cd in cds %}
-    <li><a href="{% url 'cdshelf:cd' cd.id %}">{{ cd.title }}</a></li>
+<a href="{% url 'cdshelf:cd' cd.id %}"><article>{{ cd.title }}</article></a>
 {% endfor %}
-</ul>
 {% endblock %}

@@ -8,6 +8,12 @@ asgiref==3.8.1
     # via django
 django==5.1
     # via -r requirements.in
+pydub==0.25.1
+    # via -r requirements.in
+pygame==2.6.0
+    # via -r requirements.in
+python-dotenv==1.0.1
+    # via -r requirements.in
 sqlparse==0.5.1
     # via django
 tinytag==1.10.1

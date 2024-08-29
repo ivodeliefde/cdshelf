@@ -3,6 +3,10 @@ from django.http import HttpResponse
 
 from .models import Cd, Artist, SourceDir, Song
 from .source_lib import LoadSourceDir
+from .cdplayer_lib import CdPlayer
+
+
+cd_player = CdPlayer()
 
 
 def home(request):
@@ -20,6 +24,11 @@ def artist(request, artist_id):
 def cd(request, cd_id):
     _cd = get_object_or_404(Cd, pk=cd_id)
     songs = Song.objects.filter(cd=_cd)
+    if request.method == "POST":
+        data = request.POST
+        track = int(data.get("track").split("|")[0])
+        cd_player.insert(cd_id=cd_id, track=track)
+        cd_player.play()
     return render(request, "cdshelf\\cd.html", {"cd": _cd, "songs": songs})
 
 

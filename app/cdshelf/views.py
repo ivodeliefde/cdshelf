@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
@@ -26,7 +28,8 @@ def cd(request, cd_id):
     songs = Song.objects.filter(cd=_cd)
     if request.method == "POST":
         data = request.POST
-        track = int(data.get("track").split("|")[0])
+        track = int(data.get("track").split(".")[0])
+        logging.info(f"Insert CD '{_cd}' and start as of track {data.get("track")}")
         cd_player.insert(cd_id=cd_id, track=track)
         cd_player.play()
     return render(request, "cdshelf\\cd.html", {"cd": _cd, "songs": songs})
@@ -43,3 +46,18 @@ def load_source_dir(request, source_dir_id):
     _source_dir = get_object_or_404(SourceDir, pk=source_dir_id)
     LoadSourceDir(location=_source_dir.location).load()
     return HttpResponse(f"Loaded: {_source_dir}")
+
+
+def pause(request):
+    cd_player.pause()
+    return HttpResponse("Paused playback")
+
+
+def play(request):
+    cd_player.play()
+    return HttpResponse("Started playback")
+
+
+def eject(request):
+    cd_player.eject()
+    return HttpResponse("Stopped playback")

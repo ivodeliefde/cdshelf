@@ -1,0 +1,97 @@
+body > main {
+    padding-bottom: 0;
+}
+
+/* Buttons and links */
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+[role=button],button,input[type=button],input[type=reset],input[type=submit]{
+    --pico-background-color:none;
+    --pico-border-color:none;
+    --pico-color:black;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--pico-color-slate-100);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    }
+
+[role=button]:is([aria-current],:hover,:active,:focus),button:is([aria-current],:hover,:active,:focus),input[type=button]:is([aria-current],:hover,:active,:focus),input[type=reset]:is([aria-current],:hover,:active,:focus),input[type=submit]:is([aria-current],:hover,:active,:focus){
+    --pico-background-color:none;
+    --pico-border-color:none;
+    --pico-color:black;
+}
+
+/* CD player */
+#cdplayerContainer {
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#cdslotContainer{
+    margin-top: 2vh;
+    height: 6vh;
+}
+
+#cd_icon  {
+    margin-left: 2vw;
+    text-align: left;
+}
+
+#cd_icon img {
+    max-height: 100%;
+    padding: 0.5vh;
+    opacity: 50%;
+}
+
+.buttonContainer div img {
+    width:auto;
+    height: 10vh;
+}
+
+#shelf {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+#shelfSpacing {
+    height: 1vh;
+    background-color: white;
+}
+
+/* CD page */
+#jewelCase {
+    display:flex;
+    width: 90vw;
+    margin-left: 2vw;
+    overflow: hidden;
+    border-top: 4px solid var(--pico-color-slate-200);
+    border-bottom: 4px solid var(--pico-color-slate-200);
+    border-left: 10px solid var(--pico-color-slate-200);
+    border-right: 8px solid var(--pico-color-slate-200);
+}
+
+#songContainer {
+    height: 50vh;
+    width: 100%;
+    overflow: auto;
+    margin-left: 5px;
+    border-left: 4px solid var(--pico-color-slate-200);
+}
+
+#sideCase div {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    margin:2vw;
+}
+
+#sideCase div h1 {
+    font-size: 4vmin;
+}
+
+#sideCase {
+    width: 40px;
+    transform: translatey(40vh);
+}

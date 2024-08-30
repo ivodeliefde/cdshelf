@@ -7,17 +7,40 @@
     <meta name="color-scheme" content="light dark" />
     <title>CD Shelf</title>
     <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.slate.min.css">
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.min.css"
+    >
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
+    >
+  <link rel="stylesheet" href="{% static 'css/cdshelf.css' %}">
 </head>
 <body>
     <header>
     <a href="{% url 'cdshelf:home' %}">CD Shelf</a>
     </header>
-    <main class="container">
-
+    <main>
         {% block content %}{% endblock content %}
     </main>
-    <link rel="stylesheet" href="{% static 'cdshelf.css' %}">
+    <div id="shelf" class="pico-background-sand-500">
+        <div id="shelfSpacing"></div>
+        <div id="cdplayerContainer" class="pico-background-slate-950">
+            <div id="cdslotContainer" role="group" class="pico-background-slate-850">
+                <div id="cd_icon"><img src="{% static 'icons/compact_disc.png' %}"></img></div>
+            </div>
+            <div id="buttonContainer" role="group">
+                <div id="skipLeft" class="pico-background-slate-850"><img src="{% static 'icons/skip-left-fill.svg' %}"></img></div>
+                <div  id="play" class="pico-background-slate-850"><img src="{% static 'icons/play-fill.svg' %}"></img></div>
+                <div  id="pause" class="pico-background-slate-850"><img src="{% static 'icons/pause-fill.svg' %}"></img></div>
+                <div  id="skipRight" class="pico-background-slate-850"><img src="{% static 'icons/skip-right-fill.svg' %}"></img></div>
+                <div  id="eject" class="pico-background-slate-850"><img src="{% static 'icons/eject-fill.svg' %}"></img></div>
+            </div>
+        </div>
+    </div>
+    {% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/cdplayer.js' %}"></script>
+    {% endblock javascript %}
 </body>
 </html>

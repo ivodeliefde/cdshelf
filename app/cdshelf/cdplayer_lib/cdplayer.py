@@ -19,8 +19,8 @@ class CdPlayer:
 
     def load_next_song(self):
         if len(self.queue) > 0:
-            logging.info("Go!")
             next_song = self.queue.pop(0)
+            logging.info(f"Queue song: '{next_song}'")
             self.music.queue(next_song)
 
     def event_loop(self):
@@ -31,28 +31,37 @@ class CdPlayer:
 
     def play(self):
         if self.paused:
-            logging.info("unpausing")
+            logging.info("Unpausing")
             self.paused = False
             self.music.unpause()
             return
 
-        first_song = self.queue.pop(0)
-        self.music.load(first_song)
-        self.music.play()
-        self.load_next_song()
+        if len(self.queue) > 0:
+            logging.info("Play")
+            first_song = self.queue.pop(0)
+            logging.info(f"Load song: '{first_song}'")
+            self.music.load(first_song)
+            self.music.play()
+            self.load_next_song()
 
-        event_thread = threading.Thread(target=self.event_loop)
-        event_thread.start()
+            event_thread = threading.Thread(target=self.event_loop)
+            event_thread.start()
+        else:
+            logging.info("No queued music to play")
 
     def pause(self):
-        self.pause = True
+        logging.info("Pausing")
+        self.paused = True
         self.music.pause()
 
-    def stop(self):
+    def eject(self):
+        logging.info("CD ejected")
         self.music.stop()
+        self.queue = []
 
     def insert(self, cd_id, track=0):
         _cd = get_object_or_404(Cd, pk=cd_id)
-        songs = Song.objects.filter(cd=_cd).order_by("track").filter(track__gte=track)
-        for s in songs:
-            self.queue.append(s.filepath)
+        logging.info(f"CD inserted: '{_cd}'")
+        logging.info(f"Filter track >= {track}")
+        songs = Song.objects.filter(cd=_cd).filter(track__gte=track).order_by("track")
+        self.queue = [s.filepath for s in songs]

@@ -1,17 +1,21 @@
-$(document).ready(function(){
-    $('#pause').click(function() {
-        $.ajax({url: "/cdshelf/pause", success: function(result){
-            console.log(result)
-          }});
-    });
-    $('#play').click(function() {
-        $.ajax({url: "/cdshelf/play", success: function(result){
-            console.log(result)
-          }});
-    });
-    $('#eject').click(function() {
-        $.ajax({url: "/cdshelf/eject", success: function(result){
-            console.log(result)
-          }});
-    });
-});
+document.getElementById("pause").onclick = function(){
+    fetch("/cdshelf/pause").catch(err => console.log(err));
+};
+document.getElementById("play").onclick = function(){
+    fetch("/cdshelf/play").catch(err => console.log(err));
+};
+document.getElementById("eject").onclick = function(){
+    fetch("/cdshelf/eject").catch(err => console.log(err));
+};
+
+var insertElems = document.querySelectorAll('.insert');
+for (var i=insertElems.length; i--;) {
+    insertElems[i].addEventListener('click', insert, false);
+}
+function insert() {
+    console.log("Click!");
+    fetch("/cdshelf/play?"+ new URLSearchParams({
+        cd_id: this.getAttribute("cd"),
+        track: this.getAttribute("track"),
+    }).toString()).catch(err => console.log(err));
+};

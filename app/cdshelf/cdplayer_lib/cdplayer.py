@@ -56,8 +56,8 @@ class CdPlayer:
 
     def eject(self):
         logging.info("CD ejected")
-        self.music.stop()
         self.queue = []
+        self.music.stop()
 
     def insert(self, cd_id, track=0):
         _cd = get_object_or_404(Cd, pk=cd_id)

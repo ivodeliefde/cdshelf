@@ -1,17 +1,11 @@
 {% extends "cdshelf/cdshelf_base.html" %}
 
 {% block content %}
+
+<h1>{{ cd }} // <a href="{% url 'cdshelf:artist' cd.artist.id %}">{{ cd.artist }}</a></h1>
 <div id="jewelCase">
-    <div id="sideCase">
-        <div><h1>{{ cd }} // <a href="{% url 'cdshelf:artist' cd.artist.id %}">{{ cd.artist }}</a></h1></div>
-    </div>
-    <div id="songContainer" class="pico-background-slate-50">
-        <form method="post">
-        {% csrf_token %}
-        {% for song in songs %}
-        <input type="submit" name="track" value="{{ song.track }}. {{ song.title }}" />
-        {% endfor %}
-        </form>
-    </div>
+    {% for song in songs %}
+        <div class="insert" track="{{ song.track }}" cd="{{ cd.id }}">{{ song.track }}. {{ song.title }}</div>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -26,12 +26,6 @@ def artist(request, artist_id):
 def cd(request, cd_id):
     _cd = get_object_or_404(Cd, pk=cd_id)
     songs = Song.objects.filter(cd=_cd)
-    if request.method == "POST":
-        data = request.POST
-        track = int(data.get("track").split(".")[0])
-        logging.info(f"Insert CD '{_cd}' and start as of track {data.get("track")}")
-        cd_player.insert(cd_id=cd_id, track=track)
-        cd_player.play()
     return render(request, "cdshelf\\cd.html", {"cd": _cd, "songs": songs})
 
 
@@ -54,6 +48,14 @@ def pause(request):
 
 
 def play(request):
+    cd_id = request.GET.get("cd_id", None)
+    track = request.GET.get("track", None)
+    if cd_id:
+        if not track:
+            track = 1
+        logging.info(f"Insert CD '{cd_id}' and start as of track {track}")
+        cd_player.insert(cd_id=cd_id, track=track)
+
     cd_player.play()
     return HttpResponse("Started playback")
 

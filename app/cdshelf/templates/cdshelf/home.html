@@ -4,7 +4,7 @@
 {% block content %}
 <blockquote><h1>CD Shelf</h1></blockquote>
 {% if first_cds_list %}
-    <div role="group" class="shelf">
+    <div class="pico-background-slate-50">
     {% for cd in first_cds_list %}
         <a href="{% url 'cdshelf:cd' cd.id %}"><div class="shelfcd">{{ cd.title }} - {{ cd.artist }}</div></a>
     {% endfor %}

@@ -12,8 +12,9 @@ cd_player = CdPlayer()
 
 
 def home(request):
-    first_cds_list = Cd.objects.order_by("title")[:50]
-    context = {"first_cds_list": first_cds_list}
+    logging.info("Loading home page")
+    cds_list = Cd.objects.order_by("title")
+    context = {"cds_list": cds_list}
     return render(request, "cdshelf\\home.html", context)
 
 
@@ -63,3 +64,31 @@ def play(request):
 def eject(request):
     cd_player.eject()
     return HttpResponse("Stopped playback")
+
+
+def next(request):
+    cd_player.next()
+    return HttpResponse("Next song")
+
+
+def previous(request):
+    cd_player.previous()
+    return HttpResponse("Previous song")
+
+
+def search(request):
+    cds = []
+    artists = []
+    songs = []
+    query = request.POST.get("q", None)
+    if query:
+        logging.info(f"Search CDs, Artists and Songs with query '{query}'")
+        cds = Cd.objects.filter(title__icontains=query)
+        artists = Artist.objects.filter(name__icontains=query)
+        songs = Song.objects.filter(title__icontains=query)
+
+    return render(
+        request,
+        "cdshelf\\search.html",
+        {"cds": cds, "artists": artists, "songs": songs},
+    )

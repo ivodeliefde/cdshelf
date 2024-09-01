@@ -18,8 +18,15 @@
 </head>
 <body>
     <header>
-        <a href="{% url 'cdshelf:home' %}">CD Shelf</a>
-        </header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'cdshelf:home' %}"><strong>CD Shelf</strong></a></li>
+            </ul>
+            <ul>
+              <li><a href="{% url 'cdshelf:search' %}" class="secondary">Search</a></li>
+            </ul>
+          </nav>
+    </header>
         <main class="container">
             {% block content %}{% endblock content %}
         </main>
@@ -29,10 +36,10 @@
                     <div id="cd_icon"><img src="{% static 'icons/compact_disc.png' %}"></img></div>
                 </div>
                 <div id="buttonContainer" role="group">
-                    <div id="skipLeft" class="pico-background-slate-850"><img src="{% static 'icons/skip-left-fill.svg' %}"></img></div>
+                    <div id="previous" class="pico-background-slate-850"><img src="{% static 'icons/skip-left-fill.svg' %}"></img></div>
                     <div  id="play" class="pico-background-slate-850"><img src="{% static 'icons/play-fill.svg' %}"></img></div>
                     <div  id="pause" class="pico-background-slate-850"><img src="{% static 'icons/pause-fill.svg' %}"></img></div>
-                    <div  id="skipRight" class="pico-background-slate-850"><img src="{% static 'icons/skip-right-fill.svg' %}"></img></div>
+                    <div  id="next" class="pico-background-slate-850"><img src="{% static 'icons/skip-right-fill.svg' %}"></img></div>
                     <div  id="eject" class="pico-background-slate-850"><img src="{% static 'icons/eject-fill.svg' %}"></img></div>
                 </div>
             </div>

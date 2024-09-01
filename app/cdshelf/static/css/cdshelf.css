@@ -1,7 +1,36 @@
+body > main {
+    min-height: 60vh;
+    padding-bottom: 0;
+}
+
+body > footer {
+    bottom: 0;
+    left: 0;
+    position: relative;
+    width:100%;
+    padding-block: 0;
+}
+
+body > header {
+    padding-left: 3%;
+    padding-right: 5%;
+}
+
 /* Buttons and links */
 a {
     color: inherit;
     text-decoration: inherit;
+}
+
+/* Home page */
+#cdShelf {
+    max-height: 60vh;
+    overflow: auto;
+    padding-bottom: 0;
+}
+
+#cdShelf li {
+    list-style: none;
 }
 
 /* CD player */
@@ -40,6 +69,25 @@ a {
     height: 0;
     width:90%;
     padding-bottom:80%;
+    padding-top: 3%;
+    padding-left:12%;
+    padding-right: 5%;
     background-color:none;
+    overflow: auto;
+}
+
+#jewelCase > ol {
+    max-height: 100%;
+    margin-bottom: 2%;
+}
+
+#jewelCase > ol > li {
+    cursor: pointer;
+    border-bottom: 1px solid var(--pico-color-slate-100);
+}
+
+/* Search page */
+.searchResults {
+    max-height: 30vh;
     overflow: auto;
 }

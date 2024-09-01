@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<h1>{{ cd }} // <a href="{% url 'cdshelf:artist' cd.artist.id %}">{{ cd.artist }}</a></h1>
 <div id="jewelCase">
+    <p>{{ cd }} // <a href="{% url 'cdshelf:artist' cd.artist.id %}">{{ cd.artist }}</a></p>
+    <ol>
     {% for song in songs %}
-        <div class="insert" track="{{ song.track }}" cd="{{ cd.id }}">{{ song.track }}. {{ song.title }}</div>
+        <li class="insert" cd="{{ cd.id }}" track="{{ song.track }}" value="{{ song.track }}">{{ song.title }}</li>
     {% endfor %}
+    </ol>
 </div>
 {% endblock %}

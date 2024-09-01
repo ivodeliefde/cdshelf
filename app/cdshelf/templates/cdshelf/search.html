@@ -1,0 +1,34 @@
+{% extends "cdshelf/cdshelf_base.html" %}
+
+{% block content %}
+<form action="{% url 'cdshelf:search' %}" method="post">
+    {% csrf_token %}
+    <input name="q" type="text" placeholder="search..">
+</form>
+<article>
+    <header>CDs</header>
+    <ul class="searchResults">
+        {% for cd in cds %}
+        <a href="{% url 'cdshelf:cd' cd.id %}"><li>{{ cd.title }}</li></a>
+        {% endfor %}
+    </ul>
+</article>
+
+<article>
+    <header>Artists</header>
+    <ul class="searchResults">
+        {% for artist in artists %}
+        <a href="{% url 'cdshelf:artist' artist.id %}"><li>{{ artist.name }}</li></a>
+        {% endfor %}
+    </ul>
+</article>
+
+<article>
+    <header>Songs</header>
+    <ul class="searchResults">
+        {% for song in songs %}
+        <a href="{% url 'cdshelf:cd' song.cd.id %}"><li>{{ song.title }}</li></a>
+        {% endfor %}
+    </ul>
+</article>
+{% endblock %}

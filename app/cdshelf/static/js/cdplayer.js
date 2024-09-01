@@ -7,6 +7,12 @@ document.getElementById("play").onclick = function(){
 document.getElementById("eject").onclick = function(){
     fetch("/cdshelf/eject").catch(err => console.log(err));
 };
+document.getElementById("next").onclick = function(){
+    fetch("/cdshelf/next").catch(err => console.log(err));
+};
+document.getElementById("previous").onclick = function(){
+    fetch("/cdshelf/previous").catch(err => console.log(err));
+};
 
 var insertElems = document.querySelectorAll('.insert');
 for (var i=insertElems.length; i--;) {

@@ -14,13 +14,15 @@ class LoadSourceDir:
     def walk(self):
         for path, directories, files in os.walk(self.location):
             for file in files:
-                if os.path.splitext(file)[-1].lower() in self.audio_extentions:
+                file_extension = os.path.splitext(file)[-1].lower()
+                if file_extension in self.audio_extentions:
                     full_path = os.path.join(path, file)
                     file_metadata = TinyTag.get(full_path)
                     yield file_metadata, full_path
+                else:
+                    logging.warning(f"Skipping file with extension {file_extension}")
 
     def load(self):
-        i = 0
         for song_metadata, song_filepath in self.walk():
             logging.info(f"Processing file '{song_filepath}'")
             _artist, artist_was_created = Artist.objects.get_or_create(
@@ -39,7 +41,3 @@ class LoadSourceDir:
             )
             logging.info(f"- Song '{_song.title}' (created: {song_was_created})")
             logging.info("Done.")
-            if i > 1000:
-                return
-            else:
-                i += 1

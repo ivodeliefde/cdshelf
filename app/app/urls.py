@@ -17,8 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from cdshelf import views
 
 urlpatterns = [
+    path("", views.home, name="home"),
     path("cdshelf/", include("cdshelf.urls")),
     path("admin/", admin.site.urls),
 ]

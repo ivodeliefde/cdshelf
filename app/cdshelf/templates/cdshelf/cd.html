@@ -6,7 +6,7 @@
     <p>{{ cd }} // <a href="{% url 'cdshelf:artist' cd.artist.id %}">{{ cd.artist }}</a></p>
     <ol>
     {% for song in songs %}
-        <li class="insert" cd="{{ cd.id }}" track="{{ song.track }}" value="{{ song.track }}">{{ song.title }}</li>
+        <li class="insert prevent-select" cd="{{ cd.id }}" track="{{ song.track }}" value="{{ song.track }}">{{ song.title }}</li>
     {% endfor %}
     </ol>
 </div>
